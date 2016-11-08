@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tipoinfracao", catalog = "hackathon")
-public class Tipoinfracao implements java.io.Serializable {
+public class TipoInfracao implements java.io.Serializable {
 
 	/**
 	 * 
@@ -23,10 +23,10 @@ public class Tipoinfracao implements java.io.Serializable {
 	private String descricaoTipoInfracao;
 	private Double valor;
 
-	public Tipoinfracao() {
+	public TipoInfracao() {
 	}
 
-	public Tipoinfracao(String descricaoTipoInfracao, Double valor) {
+	public TipoInfracao(String descricaoTipoInfracao, Double valor) {
 		this.descricaoTipoInfracao = descricaoTipoInfracao;
 		this.valor = valor;
 	}
