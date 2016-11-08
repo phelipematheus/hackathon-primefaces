@@ -1,5 +1,7 @@
 package com.stefanini.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -15,6 +17,18 @@ public class AgenteService {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(Agente agente){
-    	agenteRepository.incluir(agente);
+    	this.agenteRepository.incluir(agente);
+    }
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public List<Agente> lista(){
+    	return this.agenteRepository.lista();
+    }
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void excluir(Agente agente){
+    	this.agenteRepository.excluir(agente);
+    }
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void editar(Agente agente){
+    	this.agenteRepository.incluir(agente);
     }
 }

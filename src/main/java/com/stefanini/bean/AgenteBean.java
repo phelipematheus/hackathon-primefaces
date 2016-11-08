@@ -1,5 +1,8 @@
 package com.stefanini.bean;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,22 +13,46 @@ import com.stefanini.service.AgenteService;
 @Named("agenteMB")
 @RequestScoped
 public class AgenteBean {
-	private Agente agente = new Agente();
+	
+	@Inject
+	private Agente agente;
+	
+	private List<Agente> lista;
 	
 	@Inject
 	private AgenteService agenteService;
 	
-	public String chamar() {
-        return "/pages/teste";
+	public void incluir() {
+		agenteService.incluir(this.agente);
     }
+	public void editar() {
+		agenteService.incluir(this.agente);
+    }
+	
+	public String excluir() {
+		this.agenteService.excluir(this.agente);
+		this.lista = null;
+		return null;
+	}
 
 	public Agente getAgente() {
+		if(agente == null)
+			agente = new Agente();
 		return agente;
 	}
 
 	public void setAgente(Agente agente) {
 		this.agente = agente;
 	}
-	
+
+	public List<Agente> getLista() {
+		if(this.lista == null)
+			this.lista = agenteService.lista();
+		return this.lista;
+	}
+
+	public void setLista(List<Agente> lista) {
+		this.lista = lista;
+	}
 	
 }

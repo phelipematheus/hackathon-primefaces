@@ -13,11 +13,11 @@ public class AgenteRepository {
 	private EntityManager manager;
 	
 	public void incluir(Agente agente){
-		this.manager.persist(agente);
+		this.manager.merge(agente);
 	}
 	
-	public void altera(Agente agente){
-		this.manager.merge(agente);
+	public void excluir(Agente agente){
+		this.manager.remove(agente);
 	}
 	
 	public Agente busca(Integer id) {
@@ -25,7 +25,6 @@ public class AgenteRepository {
 	}
 
 	public List<Agente> lista() {
-		return this.manager.createQuery("select c from denuncia c", Agente.class)
-				.getResultList();
+		return this.manager.createQuery("select a from Agente a", Agente.class).getResultList();
 	}
 }
