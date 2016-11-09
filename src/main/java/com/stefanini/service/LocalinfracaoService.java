@@ -8,13 +8,13 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import com.stefanini.model.LocalInfracao;
-import com.stefanini.repository.LocalifracaoRepository;
+import com.stefanini.repository.LocalIfracaoRepository;
 
 @Stateless
-public class LocalinfracaoService {
+public class LocalInfracaoService {
 	
 	@Inject
-    private LocalifracaoRepository localInfracaoRepository;
+    private LocalIfracaoRepository localInfracaoRepository;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void incluir(LocalInfracao localInfracao){

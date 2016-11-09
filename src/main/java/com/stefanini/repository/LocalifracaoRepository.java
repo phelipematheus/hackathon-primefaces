@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import com.stefanini.model.LocalInfracao;
 
-public class LocalifracaoRepository {
+public class LocalIfracaoRepository {
 	
 	@Inject
 	private EntityManager manager;
@@ -25,7 +25,7 @@ public class LocalifracaoRepository {
 	}
 
 	public List<LocalInfracao> lista() {
-		return this.manager.createQuery("select a from Localinfracao a", LocalInfracao.class).getResultList();
+		return this.manager.createQuery("select a from LocalInfracao a", LocalInfracao.class).getResultList();
 	}
 	
 }
