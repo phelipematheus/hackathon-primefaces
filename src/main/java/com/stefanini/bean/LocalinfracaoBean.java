@@ -6,7 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.stefanini.model.Localinfracao;
+import com.stefanini.model.LocalInfracao;
 import com.stefanini.service.LocalinfracaoService;;
 
 @Named("localInfracaoMB")
@@ -14,9 +14,9 @@ import com.stefanini.service.LocalinfracaoService;;
 public class LocalinfracaoBean {
 	
 	@Inject
-	private Localinfracao localInfracao;
+	private LocalInfracao localInfracao;
 	
-	private List<Localinfracao> lista;
+	private List<LocalInfracao> lista;
 	@Inject
 	private LocalinfracaoService localInfracaoService;
 	
@@ -33,17 +33,17 @@ public class LocalinfracaoBean {
 		return null;
 	}
 
-	public List<Localinfracao> getLista() {
+	public List<LocalInfracao> getLista() {
 		if(this.lista == null)
 			this.lista = localInfracaoService.lista();
 		return this.lista;
 	}
 
 	
-	public Localinfracao getLocalInfracao() {
+	public LocalInfracao getLocalInfracao() {
 		return localInfracao;
 	}
-	public void setLocalInfracao(Localinfracao localInfracao) {
+	public void setLocalInfracao(LocalInfracao localInfracao) {
 		this.localInfracao = localInfracao;
 	}
 	public LocalinfracaoService getLocalInfracaoService() {

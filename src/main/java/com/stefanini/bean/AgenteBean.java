@@ -1,9 +1,5 @@
 package com.stefanini.bean;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ef5be2fa77e64cee913d1be80b481a26b6d035d
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;

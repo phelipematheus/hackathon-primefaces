@@ -5,27 +5,27 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.stefanini.model.Localinfracao;
+import com.stefanini.model.LocalInfracao;
 
 public class LocalifracaoRepository {
 	
 	@Inject
 	private EntityManager manager;
 	
-	public void incluir(Localinfracao infracao){
+	public void incluir(LocalInfracao infracao){
 		this.manager.merge(infracao);
 	}
 	
-	public void excluir(Localinfracao infracao){
+	public void excluir(LocalInfracao infracao){
 		this.manager.remove(infracao);
 	}
 	
-	public Localinfracao busca(Integer id) {
-		return this.manager.find(Localinfracao.class, id);
+	public LocalInfracao busca(Integer id) {
+		return this.manager.find(LocalInfracao.class, id);
 	}
 
-	public List<Localinfracao> lista() {
-		return this.manager.createQuery("select a from Localinfracao a", Localinfracao.class).getResultList();
+	public List<LocalInfracao> lista() {
+		return this.manager.createQuery("select a from Localinfracao a", LocalInfracao.class).getResultList();
 	}
 	
 }
