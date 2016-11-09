@@ -23,7 +23,7 @@
 	    	 <p:calendar id="popup" value="#{agenteMB.agente.dtContratacao}" required="true" requiredMessage="Data inválida."/>
 	    	 <p:message for="popup"/>
     	 </h:panelGrid>    
-    	 <h:commandButton value="Salvar" action="#{agenteMB.incluir()}" update="CadastroAgente"/>
+    	 <p:commandButton value="Salvar" action="#{agenteMB.incluir()}" update="CadastroAgente"/>
 	</h:form>
 	<h:form  id="CadastroAgente">
 	<h1>Cadastro de Agentes</h1>
