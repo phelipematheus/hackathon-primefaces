@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<h1>Insira uma descrição para um Tipo de Telefone: </h1>
+	<h:form id="tipoTelefone">
+		<h:inputHidden value="#{tipoTelefoneMB.tipoTelefone.idTipoTelefone}" />
+		<h:panelGrid columns="3" cellpadding="5">
+			<p:outputLabel value="Descrição: " />
+			<p:inputText id="descricaoTipoTelefone"
+				value="#{tipoTelefoneMB.tipoTelefone.descricaoTipoTelefone}"
+				required="true" requiredMessage="Campo obrigatório." />
+			<p:message for="descricaoTipoTelefone" />
+
+
+		</h:panelGrid>
+		<h:commandButton value="Salvar" action="#{tipoTelefoneMB.incluir()}"
+			update="CadastroAgente" />
+		<p:link href="/index.jsf">Voltar</p:link>
+		
+	</h:form>
+	
+	<h:form  id="CadastroTipoTelefone">
+	<h1>Descrição do tipo de telefone: </h1>
+		<p:dataTable value="#{tipoTelefoneMB.lista}" var="tipoTelefoned" rendered="#{not empty tipoTelefoneMB.lista}" resizableColumns="true">
+			<p:column>
+				<f:facet name="header">Data contratação</f:facet>
+				<p:outputLabel value="#{tipoTelefoned.descricaoTipoTelefone}"/>
+			</p:column>
+			<p:column>
+				<h:commandLink action="#{tipoTelefoneMB.excluir()}"
+					onclick="if (!confirm('Confirmar a exclusão do agente #{tipoTelefoned.descricaoTipoTelefone}?')) return false;">
+					<h:graphicImage library="imagens" name="excluir16.png"/>
+					<f:setPropertyActionListener target="#{tipoTelefoneMB.tipoTelefone}" value="#{tipoTelefoned}" />
+				</h:commandLink>
+				<h:commandLink action="#{tipoTelefoneMB.editar()}">
+					<h:graphicImage library="imagens" name="editar16.png"/>
+					<f:setPropertyActionListener target="#{tipoTelefoneMB.tipoTelefone}" value="#{tipoTelefoned}" />
+				</h:commandLink>
+				
+			</p:column>
+			
+		</p:dataTable>
+		
+		
+	</h:form>
+	
+	
+	
+	
+	
+
+	
+
+</body>
+</html>
