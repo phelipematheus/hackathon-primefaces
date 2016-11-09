@@ -1,6 +1,9 @@
 package com.stefanini.bean;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6ef5be2fa77e64cee913d1be80b481a26b6d035d
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -34,6 +37,12 @@ public class AgenteBean {
 		this.lista = null;
 	}
 
+	public List<Agente> getLista() {
+		if(this.lista == null)
+			this.lista = agenteService.lista();
+		return this.lista;
+	}
+	
 	public Agente getAgente() {
 		if(agente == null)
 			agente = new Agente();
@@ -42,12 +51,6 @@ public class AgenteBean {
 
 	public void setAgente(Agente agente) {
 		this.agente = agente;
-	}
-
-	public List<Agente> getLista() {
-		if(this.lista == null)
-			this.lista = agenteService.lista();
-		return this.lista;
 	}
 
 	public void setLista(List<Agente> lista) {
