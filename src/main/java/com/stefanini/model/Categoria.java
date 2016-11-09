@@ -1,11 +1,16 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,18 +20,16 @@ import javax.persistence.Table;
 @Table(name = "categoria", catalog = "hackathon")
 public class Categoria implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer idCategoria;
 	private String descricaiCategoria;
+	private Set<Modelo> modelos = new HashSet<Modelo>(0);
 
 	public Categoria() {
 	}
 
-	public Categoria(String descricaiCategoria) {
+	public Categoria(String descricaiCategoria, Set<Modelo> modelos) {
 		this.descricaiCategoria = descricaiCategoria;
+		this.modelos = modelos;
 	}
 
 	@Id
@@ -48,6 +51,15 @@ public class Categoria implements java.io.Serializable {
 
 	public void setDescricaiCategoria(String descricaiCategoria) {
 		this.descricaiCategoria = descricaiCategoria;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<Modelo> getModelos() {
+		return this.modelos;
+	}
+
+	public void setModelos(Set<Modelo> modelos) {
+		this.modelos = modelos;
 	}
 
 }

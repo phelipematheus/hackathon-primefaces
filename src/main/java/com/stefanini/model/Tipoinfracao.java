@@ -1,11 +1,16 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,20 +20,18 @@ import javax.persistence.Table;
 @Table(name = "tipoinfracao", catalog = "hackathon")
 public class TipoInfracao implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer idTipoInfracao;
 	private String descricaoTipoInfracao;
 	private Double valor;
+	private Set<Infracoes> infracoeses = new HashSet<Infracoes>(0);
 
 	public TipoInfracao() {
 	}
 
-	public TipoInfracao(String descricaoTipoInfracao, Double valor) {
+	public TipoInfracao(String descricaoTipoInfracao, Double valor, Set<Infracoes> infracoeses) {
 		this.descricaoTipoInfracao = descricaoTipoInfracao;
 		this.valor = valor;
+		this.infracoeses = infracoeses;
 	}
 
 	@Id
@@ -59,6 +62,15 @@ public class TipoInfracao implements java.io.Serializable {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoinfracao")
+	public Set<Infracoes> getInfracoeses() {
+		return this.infracoeses;
+	}
+
+	public void setInfracoeses(Set<Infracoes> infracoeses) {
+		this.infracoeses = infracoeses;
 	}
 
 }

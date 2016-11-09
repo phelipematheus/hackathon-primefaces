@@ -1,11 +1,18 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,24 +22,25 @@ import javax.persistence.Table;
 @Table(name = "modelo", catalog = "hackathon")
 public class Modelo implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer idModelo;
+	private Categoria categoria;
 	private int idCategoria;
 	private String descricaoModelo;
+	private Set<Veiculos> veiculoses = new HashSet<Veiculos>(0);
 
 	public Modelo() {
 	}
 
-	public Modelo(int idCategoria) {
+	public Modelo(Categoria categoria, int idCategoria) {
+		this.categoria = categoria;
 		this.idCategoria = idCategoria;
 	}
 
-	public Modelo(int idCategoria, String descricaoModelo) {
+	public Modelo(Categoria categoria, int idCategoria, String descricaoModelo, Set<Veiculos> veiculoses) {
+		this.categoria = categoria;
 		this.idCategoria = idCategoria;
 		this.descricaoModelo = descricaoModelo;
+		this.veiculoses = veiculoses;
 	}
 
 	@Id
@@ -45,6 +53,16 @@ public class Modelo implements java.io.Serializable {
 
 	public void setIdModelo(Integer idModelo) {
 		this.idModelo = idModelo;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "categoria_idCategoria", nullable = false)
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Column(name = "idCategoria", nullable = false)
@@ -63,6 +81,15 @@ public class Modelo implements java.io.Serializable {
 
 	public void setDescricaoModelo(String descricaoModelo) {
 		this.descricaoModelo = descricaoModelo;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modelo")
+	public Set<Veiculos> getVeiculoses() {
+		return this.veiculoses;
+	}
+
+	public void setVeiculoses(Set<Veiculos> veiculoses) {
+		this.veiculoses = veiculoses;
 	}
 
 }

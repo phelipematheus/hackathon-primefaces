@@ -1,5 +1,6 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,21 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TelefonesId implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int numero;
 	private int ddd;
-	private int cpfProprietario;
 
 	public TelefonesId() {
 	}
 
-	public TelefonesId(int numero, int ddd, int cpfProprietario) {
+	public TelefonesId(int numero, int ddd) {
 		this.numero = numero;
 		this.ddd = ddd;
-		this.cpfProprietario = cpfProprietario;
 	}
 
 	@Column(name = "numero", nullable = false)
@@ -45,15 +40,6 @@ public class TelefonesId implements java.io.Serializable {
 		this.ddd = ddd;
 	}
 
-	@Column(name = "cpfProprietario", nullable = false)
-	public int getCpfProprietario() {
-		return this.cpfProprietario;
-	}
-
-	public void setCpfProprietario(int cpfProprietario) {
-		this.cpfProprietario = cpfProprietario;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -63,8 +49,7 @@ public class TelefonesId implements java.io.Serializable {
 			return false;
 		TelefonesId castOther = (TelefonesId) other;
 
-		return (this.getNumero() == castOther.getNumero()) && (this.getDdd() == castOther.getDdd())
-				&& (this.getCpfProprietario() == castOther.getCpfProprietario());
+		return (this.getNumero() == castOther.getNumero()) && (this.getDdd() == castOther.getDdd());
 	}
 
 	public int hashCode() {
@@ -72,7 +57,6 @@ public class TelefonesId implements java.io.Serializable {
 
 		result = 37 * result + this.getNumero();
 		result = 37 * result + this.getDdd();
-		result = 37 * result + this.getCpfProprietario();
 		return result;
 	}
 

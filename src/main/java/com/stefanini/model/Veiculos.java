@@ -1,9 +1,16 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -13,23 +20,28 @@ import javax.persistence.Table;
 @Table(name = "veiculos", catalog = "hackathon")
 public class Veiculos implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String placa;
-	private int cpfProprietario;
-	private int idModelo;
+	private Modelo modelo;
+	private Proprietario proprietario;
 	private String uf;
+	private Set<Infracoes> infracoeses = new HashSet<Infracoes>(0);
 
 	public Veiculos() {
 	}
 
-	public Veiculos(String placa, int cpfProprietario, int idModelo, String uf) {
+	public Veiculos(String placa, Modelo modelo, Proprietario proprietario, String uf) {
 		this.placa = placa;
-		this.cpfProprietario = cpfProprietario;
-		this.idModelo = idModelo;
+		this.modelo = modelo;
+		this.proprietario = proprietario;
 		this.uf = uf;
+	}
+
+	public Veiculos(String placa, Modelo modelo, Proprietario proprietario, String uf, Set<Infracoes> infracoeses) {
+		this.placa = placa;
+		this.modelo = modelo;
+		this.proprietario = proprietario;
+		this.uf = uf;
+		this.infracoeses = infracoeses;
 	}
 
 	@Id
@@ -43,22 +55,24 @@ public class Veiculos implements java.io.Serializable {
 		this.placa = placa;
 	}
 
-	@Column(name = "cpfProprietario", nullable = false)
-	public int getCpfProprietario() {
-		return this.cpfProprietario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idModelo", nullable = false)
+	public Modelo getModelo() {
+		return this.modelo;
 	}
 
-	public void setCpfProprietario(int cpfProprietario) {
-		this.cpfProprietario = cpfProprietario;
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
 	}
 
-	@Column(name = "idModelo", nullable = false)
-	public int getIdModelo() {
-		return this.idModelo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cpfProprietario", nullable = false)
+	public Proprietario getProprietario() {
+		return this.proprietario;
 	}
 
-	public void setIdModelo(int idModelo) {
-		this.idModelo = idModelo;
+	public void setProprietario(Proprietario proprietario) {
+		this.proprietario = proprietario;
 	}
 
 	@Column(name = "uf", nullable = false, length = 2)
@@ -68,6 +82,15 @@ public class Veiculos implements java.io.Serializable {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "veiculos")
+	public Set<Infracoes> getInfracoeses() {
+		return this.infracoeses;
+	}
+
+	public void setInfracoeses(Set<Infracoes> infracoeses) {
+		this.infracoeses = infracoeses;
 	}
 
 }

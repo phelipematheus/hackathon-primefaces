@@ -1,11 +1,15 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,26 +19,23 @@ import javax.persistence.Table;
 @Table(name = "telefones", catalog = "hackathon")
 public class Telefones implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private TelefonesId id;
-	private int idTipoTelefone;
+	private Proprietario proprietario;
+	private Tipotelefone tipotelefone;
 
 	public Telefones() {
 	}
 
-	public Telefones(TelefonesId id, int idTipoTelefone) {
+	public Telefones(TelefonesId id, Proprietario proprietario, Tipotelefone tipotelefone) {
 		this.id = id;
-		this.idTipoTelefone = idTipoTelefone;
+		this.proprietario = proprietario;
+		this.tipotelefone = tipotelefone;
 	}
 
 	@EmbeddedId
 
 	@AttributeOverrides({ @AttributeOverride(name = "numero", column = @Column(name = "numero", nullable = false)),
-			@AttributeOverride(name = "ddd", column = @Column(name = "ddd", nullable = false)),
-			@AttributeOverride(name = "cpfProprietario", column = @Column(name = "cpfProprietario", nullable = false)) })
+			@AttributeOverride(name = "ddd", column = @Column(name = "ddd", nullable = false)) })
 	public TelefonesId getId() {
 		return this.id;
 	}
@@ -43,13 +44,24 @@ public class Telefones implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "idTipoTelefone", nullable = false)
-	public int getIdTipoTelefone() {
-		return this.idTipoTelefone;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cpfProprietario", nullable = false)
+	public Proprietario getProprietario() {
+		return this.proprietario;
 	}
 
-	public void setIdTipoTelefone(int idTipoTelefone) {
-		this.idTipoTelefone = idTipoTelefone;
+	public void setProprietario(Proprietario proprietario) {
+		this.proprietario = proprietario;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idTipoTelefone", nullable = false)
+	public Tipotelefone getTipotelefone() {
+		return this.tipotelefone;
+	}
+
+	public void setTipotelefone(Tipotelefone tipotelefone) {
+		this.tipotelefone = tipotelefone;
 	}
 
 }

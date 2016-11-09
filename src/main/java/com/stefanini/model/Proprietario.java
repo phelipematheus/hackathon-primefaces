@@ -1,12 +1,17 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,10 +23,6 @@ import javax.persistence.TemporalType;
 @Table(name = "proprietario", catalog = "hackathon")
 public class Proprietario implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer cpfProprietario;
 	private String nome;
 	private String endereco;
@@ -30,12 +31,14 @@ public class Proprietario implements java.io.Serializable {
 	private String uf;
 	private String sexo;
 	private Date dtNascimento;
+	private Set<Veiculos> veiculoses = new HashSet<Veiculos>(0);
+	private Set<Telefones> telefoneses = new HashSet<Telefones>(0);
 
 	public Proprietario() {
 	}
 
 	public Proprietario(String nome, String endereco, String bairro, String cidade, String uf, String sexo,
-			Date dtNascimento) {
+			Date dtNascimento, Set<Veiculos> veiculoses, Set<Telefones> telefoneses) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.bairro = bairro;
@@ -43,6 +46,8 @@ public class Proprietario implements java.io.Serializable {
 		this.uf = uf;
 		this.sexo = sexo;
 		this.dtNascimento = dtNascimento;
+		this.veiculoses = veiculoses;
+		this.telefoneses = telefoneses;
 	}
 
 	@Id
@@ -119,6 +124,24 @@ public class Proprietario implements java.io.Serializable {
 
 	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
+	public Set<Veiculos> getVeiculoses() {
+		return this.veiculoses;
+	}
+
+	public void setVeiculoses(Set<Veiculos> veiculoses) {
+		this.veiculoses = veiculoses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
+	public Set<Telefones> getTelefoneses() {
+		return this.telefoneses;
+	}
+
+	public void setTelefoneses(Set<Telefones> telefoneses) {
+		this.telefoneses = telefoneses;
 	}
 
 }

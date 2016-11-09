@@ -1,6 +1,6 @@
 package com.stefanini.bean;
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -29,10 +29,9 @@ public class AgenteBean {
 		agenteService.incluir(this.agente);
     }
 	
-	public String excluir() {
+	public void excluir() {
 		this.agenteService.excluir(this.agente);
 		this.lista = null;
-		return null;
 	}
 
 	public Agente getAgente() {

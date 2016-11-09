@@ -1,11 +1,15 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,38 +18,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "infracoes", catalog = "hackathon")
 public class Infracoes implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "idInfracao", unique = true, nullable = false)
+
 	private Integer idInfracao;
-	
-	@Column(name = "idAgente", nullable = false)
 	private Agente agente;
-	
-	@Column(name = "idLocalInfracao", nullable = false)
-	private LocalInfracao localInfracao;
-	
-	@Column(name = "idTipoInfracao", nullable = false)
-	private TipoInfracao tipoInfracao;
-	
-	@Column(name = "placa", nullable = false, length = 7)
-	private Veiculos veiculo;
-	
-	@Column(name = "velocidade")
+	private LocalInfracao localinfracao;
+	private TipoInfracao tipoinfracao;
+	private Veiculos veiculos;
 	private Integer velocidade;
 
 	public Infracoes() {
 	}
 
-	public Infracoes(Agente agente, LocalInfracao localinfracao, TipoInfracao tipoinfracao, Veiculos veiculo) {
+	public Infracoes(Agente agente, LocalInfracao localinfracao, TipoInfracao tipoinfracao, Veiculos veiculos) {
 		this.agente = agente;
-		this.localInfracao = localinfracao;
-		this.tipoInfracao = tipoinfracao;
-		this.veiculo = veiculo;
+		this.localinfracao = localinfracao;
+		this.tipoinfracao = tipoinfracao;
+		this.veiculos = veiculos;
 	}
 
+	public Infracoes(Agente agente, LocalInfracao localinfracao, TipoInfracao tipoinfracao, Veiculos veiculos,
+			Integer velocidade) {
+		this.agente = agente;
+		this.localinfracao = localinfracao;
+		this.tipoinfracao = tipoinfracao;
+		this.veiculos = veiculos;
+		this.velocidade = velocidade;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "idInfracao", unique = true, nullable = false)
 	public Integer getIdInfracao() {
 		return this.idInfracao;
 	}
@@ -53,7 +56,9 @@ public class Infracoes implements java.io.Serializable {
 	public void setIdInfracao(Integer idInfracao) {
 		this.idInfracao = idInfracao;
 	}
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idAgente", nullable = false)
 	public Agente getAgente() {
 		return this.agente;
 	}
@@ -62,30 +67,37 @@ public class Infracoes implements java.io.Serializable {
 		this.agente = agente;
 	}
 
-	public LocalInfracao getLocalInfracao() {
-		return this.localInfracao;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idLocalInfracao", nullable = false)
+	public LocalInfracao getLocalinfracao() {
+		return this.localinfracao;
 	}
 
-	public void setLocalInfracao(LocalInfracao localInfracao) {
-		this.localInfracao = localInfracao;
+	public void setLocalinfracao(LocalInfracao localinfracao) {
+		this.localinfracao = localinfracao;
 	}
 
-	public TipoInfracao getTipoInfracao() {
-		return this.tipoInfracao;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idTipoInfracao", nullable = false)
+	public TipoInfracao getTipoinfracao() {
+		return this.tipoinfracao;
 	}
 
-	public void setTipoInfracao(TipoInfracao tipoInfracao) {
-		this.tipoInfracao = tipoInfracao;
-	}
-	
-	public Veiculos getVeiculo() {
-		return this.veiculo;
+	public void setTipoinfracao(TipoInfracao tipoinfracao) {
+		this.tipoinfracao = tipoinfracao;
 	}
 
-	public void setVeiculos(Veiculos veiculo) {
-		this.veiculo = veiculo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "placa", nullable = false)
+	public Veiculos getVeiculos() {
+		return this.veiculos;
 	}
 
+	public void setVeiculos(Veiculos veiculos) {
+		this.veiculos = veiculos;
+	}
+
+	@Column(name = "velocidade")
 	public Integer getVelocidade() {
 		return this.velocidade;
 	}

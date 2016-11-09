@@ -1,11 +1,16 @@
 package com.stefanini.model;
-// Generated 07/11/2016 12:04:57 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 09/11/2016 08:59:45 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,18 +20,16 @@ import javax.persistence.Table;
 @Table(name = "tipotelefone", catalog = "hackathon")
 public class Tipotelefone implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer idTipoTelefone;
 	private String descricaoTipoTelefone;
+	private Set<Telefones> telefoneses = new HashSet<Telefones>(0);
 
 	public Tipotelefone() {
 	}
 
-	public Tipotelefone(String descricaoTipoTelefone) {
+	public Tipotelefone(String descricaoTipoTelefone, Set<Telefones> telefoneses) {
 		this.descricaoTipoTelefone = descricaoTipoTelefone;
+		this.telefoneses = telefoneses;
 	}
 
 	@Id
@@ -48,6 +51,15 @@ public class Tipotelefone implements java.io.Serializable {
 
 	public void setDescricaoTipoTelefone(String descricaoTipoTelefone) {
 		this.descricaoTipoTelefone = descricaoTipoTelefone;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipotelefone")
+	public Set<Telefones> getTelefoneses() {
+		return this.telefoneses;
+	}
+
+	public void setTelefoneses(Set<Telefones> telefoneses) {
+		this.telefoneses = telefoneses;
 	}
 
 }
