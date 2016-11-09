@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "localinfracao", catalog = "hackathon")
-public class Localinfracao implements java.io.Serializable {
+public class LocalInfracao implements java.io.Serializable {
 
 	/**
 	 * 
@@ -23,10 +23,10 @@ public class Localinfracao implements java.io.Serializable {
 	private String descricaoLocalInfracao;
 	private Double velocidadePermitida;
 
-	public Localinfracao() {
+	public LocalInfracao() {
 	}
 
-	public Localinfracao(String descricaoLocalInfracao, Double velocidadePermitida) {
+	public LocalInfracao(String descricaoLocalInfracao, Double velocidadePermitida) {
 		this.descricaoLocalInfracao = descricaoLocalInfracao;
 		this.velocidadePermitida = velocidadePermitida;
 	}
